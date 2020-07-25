@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:alpine
 
 ENV INSTALL_PATH /discord
 RUN mkdir -p $INSTALL_PATH

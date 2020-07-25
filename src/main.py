@@ -18,7 +18,14 @@ ERROR_MESSAGE = '''Sorry, I can't help with that yet'''
 
 class AssistantDiscordBot(AutoShardedBot):
     """Responds to Discord User Queries"""
-    def __init__(self, device_model_id=None, device_id=None, credentials=None, token=None, dbl_token=None):
+
+    def __init__(
+            self,
+            device_model_id=None,
+            device_id=None,
+            credentials=None,
+            token=None,
+            dbl_token=None):
         super(AssistantDiscordBot, self).__init__(
             command_prefix=None,
             fetch_offline_members=False
