@@ -14,9 +14,9 @@ queries are handled by a Neural Network on Google cloud servers.
 Help is the only hardcoded command.'''
 
 ERROR_MESSAGE = '''Sorry, I can't help with that yet'''
-FAIL_MESSAGE = '''It seems that you have disabled your 
-personalized responses for Google Assistant. Please enable them
-to receive appropiate response from the bot. '''
+FAIL_MESSAGE = '''It seems that personalized response are
+disabled. No responses would be receieved until the
+personalized responses are enabled again.'''
 
 
 class AssistantDiscordBot(AutoShardedBot):
