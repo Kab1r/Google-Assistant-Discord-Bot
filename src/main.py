@@ -5,7 +5,8 @@ from discord.ext.commands import AutoShardedBot
 from assist import Assistant
 from top_api import top_setup
 
-INVOCATION_PREFIXES = ['la gardaş bak hele,', 'ula uşağum bak bağa da,', 'Googlecum bana bakar mısın,']
+INVOCATION_PREFIXES = ['la gardaş bak hele,',
+                       'ula uşağum bak bağa da,', 'Googlecum bana bakar mısın,']
 
 HELP_MESSAGE = '''Abi beklettiğim için kusuruma bakma.Ben senin asistanınım :grinning:
 Yardım etmemi istiyorsan, "Googlecum bana bakar mısın" demen yeterli Sorgularınız doğrudan ele alınmaz,
