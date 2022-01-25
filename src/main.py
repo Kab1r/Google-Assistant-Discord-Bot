@@ -1,49 +1,50 @@
 import os
 
-from discord.ext.commands import AutoShardedBot
-
 from assist import Assistant
+from discord.ext.commands import AutoShardedBot
 from top_api import top_setup
 
-INVOCATION_PREFIXES = ['hey google,', 'ok google,', 'okay google,']
+INVOCATION_PREFIXES = [
+    "la gardaş bak hele,",
+    "ula uşağum bak bağa da,",
+    "Googlecum bana bakar mısın,",
+]
 
-HELP_MESSAGE = '''I\'m your Google Assistant :grinning:
-Ready to help, just say `Hey Google, `
-Your queries are not handled directly,
-queries are handled by a Neural Network on Google cloud servers.
-Help is the only hardcoded command.'''
+HELP_MESSAGE = """Abi beklettiğim için kusuruma bakma.Ben senin asistanınım :grinning:
+Yardım etmemi istiyorsan, "Googlecum bana bakar mısın" demen yeterli Sorgularınız doğrudan ele alınmaz,
+sorgular, Google bulut sunucularında bir Sinir Ağı tarafından işlenir.
+Yardım, sabit kodlanmış tek komuttur."""
 
-ERROR_MESSAGE = '''Sorry, I can't help with that yet'''
+ERROR_MESSAGE = """Abi üzülmeni istemem ama şuanlık sana yardımcı olamam"""
 
 
 class AssistantDiscordBot(AutoShardedBot):
-    """Responds to Discord User Queries"""
+    """Discord Hesap bilgi sorgularına yardımcı olur"""
 
     def __init__(
-            self,
-            device_model_id=None,
-            device_id=None,
-            credentials=None,
-            token=None,
-            dbl_token=None):
-        super(AssistantDiscordBot, self).__init__(
-            command_prefix=None,
-            fetch_offline_members=False
-        )
+        self,
+        device_model_id=None,
+        device_id=None,
+        credentials=None,
+        token=None,
+        dbl_token=None,
+    ):
+        super(AssistantDiscordBot, self).__init__(command_prefix=None,
+                                                  fetch_offline_members=False)
         self.dbl_token = dbl_token
         self.assistant = Assistant(
             device_model_id=device_model_id,
             device_id=device_id,
             credentials=credentials,
-            token=token
+            token=token,
         )
 
     async def on_ready(self):
-        print('Logged in as')
+        print("olarak giriş yaptı")
         print(self.user.name)
         print(self.user.id)
-        print('------')
-        if(self.dbl_token):
+        print("------")
+        if self.dbl_token:
             top_setup(self, self.dbl_token)
 
     async def on_message(self, message):
@@ -54,7 +55,7 @@ class AssistantDiscordBot(AutoShardedBot):
         if list(filter(lower_content.startswith, INVOCATION_PREFIXES)) == []:
             return
 
-        if 'help' in lower_content[:18]:
+        if "help" in lower_content[:18]:
             await message.channel.send(HELP_MESSAGE)
 
         assistant_response = self.assistant.text_assist(lower_content)
@@ -63,22 +64,22 @@ class AssistantDiscordBot(AutoShardedBot):
             await message.channel.send(assistant_response)
 
 
-if __name__ == '__main__':
-    device_model_id = os.environ.get('GA_DEVICE_MODEL_ID')
-    device_id = os.environ.get('GA_DEVICE_ID')
-    assistant_token = os.environ.get('GA_TOKEN')
-    credentials = os.environ.get('GA_CREDENTIALS')
+if __name__ == "__main__":
+    device_model_id = os.environ.get("GA_DEVICE_MODEL_ID")
+    device_id = os.environ.get("GA_DEVICE_ID")
+    assistant_token = os.environ.get("GA_TOKEN")
+    credentials = os.environ.get("GA_CREDENTIALS")
 
-    dbl_token = os.environ.get('DBL_TOKEN')
+    dbl_token = os.environ.get("DBL_TOKEN")
 
-    discord_token = os.environ.get('DISCORD_TOKEN')
+    discord_token = os.environ.get("DISCORD_TOKEN")
 
     client = AssistantDiscordBot(
         device_model_id=device_model_id,
         device_id=device_id,
         credentials=credentials,
         token=assistant_token,
-        dbl_token=dbl_token
+        dbl_token=dbl_token,
     )
 
     client.run(discord_token)
