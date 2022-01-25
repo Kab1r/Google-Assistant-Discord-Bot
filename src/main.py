@@ -1,8 +1,7 @@
 import os
 
-from discord.ext.commands import AutoShardedBot
-
 from assist import Assistant
+from discord.ext.commands import AutoShardedBot
 from top_api import top_setup
 
 INVOCATION_PREFIXES = [
