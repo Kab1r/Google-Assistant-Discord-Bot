@@ -5,19 +5,18 @@ from discord.ext.commands import AutoShardedBot
 from assist import Assistant
 from top_api import top_setup
 
-INVOCATION_PREFIXES = ['hey google,', 'ok google,', 'okay google,']
+INVOCATION_PREFIXES = ['la gardaş bak hele,', 'ula uşağum bak bağa da,', 'Googlecum bana bakar mısın,']
 
-HELP_MESSAGE = '''I\'m your Google Assistant :grinning:
-Ready to help, just say `Hey Google, `
-Your queries are not handled directly,
-queries are handled by a Neural Network on Google cloud servers.
-Help is the only hardcoded command.'''
+HELP_MESSAGE = '''Abi beklettiğim için kusuruma bakma.Ben senin asistanınım :grinning:
+Yardım etmemi istiyorsan, "Googlecum bana bakar mısın" demen yeterli Sorgularınız doğrudan ele alınmaz,
+sorgular, Google bulut sunucularında bir Sinir Ağı tarafından işlenir.
+Yardım, sabit kodlanmış tek komuttur.'''
 
-ERROR_MESSAGE = '''Sorry, I can't help with that yet'''
+ERROR_MESSAGE = '''Abi üzülmeni istemem ama şuanlık sana yardımcı olamam'''
 
 
 class AssistantDiscordBot(AutoShardedBot):
-    """Responds to Discord User Queries"""
+    """Discord Hesap bilgi sorgularına yardımcı olur"""
 
     def __init__(
             self,
@@ -39,7 +38,7 @@ class AssistantDiscordBot(AutoShardedBot):
         )
 
     async def on_ready(self):
-        print('Logged in as')
+        print('olarak giriş yaptı')
         print(self.user.name)
         print(self.user.id)
         print('------')
