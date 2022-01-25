@@ -29,9 +29,8 @@ class AssistantDiscordBot(AutoShardedBot):
         token=None,
         dbl_token=None,
     ):
-        super(AssistantDiscordBot, self).__init__(
-            command_prefix=None, fetch_offline_members=False
-        )
+        super(AssistantDiscordBot, self).__init__(command_prefix=None,
+                                                  fetch_offline_members=False)
         self.dbl_token = dbl_token
         self.assistant = Assistant(
             device_model_id=device_model_id,
